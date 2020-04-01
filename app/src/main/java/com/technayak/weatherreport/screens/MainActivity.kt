@@ -21,6 +21,8 @@ import com.technayak.weatherreport.utils.DateConverter
 import com.technayak.weatherreport.utils.SharedData
 import com.technayak.weatherreport.viewmodels.WeatherViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,6 +56,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var preferedData: SharedData
     private lateinit var dataReceiver: Receiver
     private lateinit var locationReceiver: LocationReceiver
+
+    val df = DecimalFormat("#.##")
 
     val LOCATION_ON_REQUEST = 1001
     private val LOCATION_PERMISSION_REQUEST = 1002
@@ -94,17 +98,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObservers() {
         model.getWeatherData().observe(this, Observer<WeatherData> { weatherData ->
-            val unitType= if (preferedData.getUnitType().equals("c",true)) "\u2103" else "\u2109"
-            val windType= if (preferedData.getUnitType().equals("c",true)) "Mt/S" else "Mi/H"
+            val unitType = if (preferedData.getUnitType().equals("c", true)) " \u2103" else " \u2109"
+            val windType = if (preferedData.getUnitType().equals("c", true)) " Mt/S" else " Mi/H"
 
             supportActionBar!!.title = weatherData.name + " / " + weatherData.sys.country
             tvWeatherDescription.text = weatherData.weather[0].description.toUpperCase()
-            tvTemparature.text = weatherData.main.temp.toInt().toString() + unitType
-            tvMinMaxTemparature.text = weatherData.main.temp_max.toInt()
-                .toString() + unitType + " / " + weatherData.main.temp_min.toInt()
+            tvTemparature.text = df.format(weatherData.main.temp).toString() + unitType
+            tvMinMaxTemparature.text = df.format(weatherData.main.temp_max)
+                .toString() + unitType + " / " + df.format(weatherData.main.temp_min)
                 .toString() + unitType
             tvHumidity.text = weatherData.main.humidity.toString() + "%"
-            tvWind.text = weatherData.wind.speed.toInt().toString() + windType
+            tvWind.text = df.format(weatherData.wind.speed).toString() + windType
             tvUpdatedOn.text = "Recorded on: " + dateConverter.convertDate(weatherData.dt.toLong())
 
             Glide.with(this)
@@ -133,13 +137,13 @@ class MainActivity : AppCompatActivity() {
         })
 
         model.getUnitType().observe(this, Observer<String> { unitType ->
-            if (unitType.equals("C",true)){
+            if (unitType.equals("C", true)) {
                 tvCelsius.setTextColor(resources.getColor(R.color.colorTextBlue))
                 tvCelsius.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
 
                 tvFahrenheit.setTextColor(resources.getColor(R.color.colorWhite))
                 tvFahrenheit.setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
-            }else{
+            } else {
                 tvFahrenheit.setTextColor(resources.getColor(R.color.colorTextBlue))
                 tvFahrenheit.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
 

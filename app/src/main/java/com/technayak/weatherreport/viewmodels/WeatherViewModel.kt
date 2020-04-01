@@ -99,7 +99,7 @@ class WeatherViewModel(application: Application, isFreshCall: Boolean) :
             JsonObjectRequest(Request.Method.GET, Urls(context).getWeatherUrl(), null,
                 Response.Listener { response ->
                     try {
-                        println("myResponse: " + response.toString())
+                            println("myResponse: " + response.toString())
                         val weatherResponse: WeatherData =
                             Gson().fromJson(response.toString(), WeatherData::class.java)
                         weatherData.value = weatherResponse
