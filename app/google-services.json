@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "244082480065",
+    "firebase_url": "https://weatherapp-77787.firebaseio.com",
+    "project_id": "weatherapp-77787",
+    "storage_bucket": "weatherapp-77787.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244082480065:android:4bc1b2816482a893055540",
+        "android_client_info": {
+          "package_name": "com.technayak.weatherreport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244082480065-fdlqk86fsgsmehsd2o417pbd3epg5isk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ7hxJudwjECMrZZzN0NLBB8kZu-P3muM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244082480065-fdlqk86fsgsmehsd2o417pbd3epg5isk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
